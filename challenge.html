@@ -37,7 +37,7 @@ sys = new System();
 </pre>
 
 
-Hint 1: Begin by "priming" the cache, filling the cache with known memory blocks using <code>sys.attackerAccess()</code> calls. Notice that each cache miss takes 3 seconds to retrieve the block from main memory, but each subsequent access of the same block is immediate since it is a cache hit.
+Hint 1: Begin by "priming" the cache, filling the cache with known memory blocks using <code>sys.attackerAccess()</code> calls. Notice that a cache miss takes 3 seconds to retrieve the block from main memory, but each subsequent access of the same block is immediate since it is a cache hit.
 
 Hint 2: Call <code>sys.victimProgram()</code> to run the victim program, which replaces certain cache blocks based on the value of <code>FLAG</code>.
 
