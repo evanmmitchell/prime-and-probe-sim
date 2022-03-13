@@ -1,1 +1,1 @@
-# prime-and-probe-sim
+# Simulated Prime+Probe CTF Challenge
