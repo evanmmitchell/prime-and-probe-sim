@@ -72,7 +72,9 @@ class System {
 
   victimProgram() {
     for (let i = 0; i < FLAG.length; i++) {
-      this.#victimAccess(FLAG[i].charCodeAt() - 65);
+      let char = FLAG.charAt(i);
+      let address = char.charCodeAt() - 65;
+      let value = this.#victimAccess(address);
     }
     console.log("VICTIM PROGRAM COMPLETE");
   }

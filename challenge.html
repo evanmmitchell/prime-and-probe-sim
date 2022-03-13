@@ -1,6 +1,6 @@
 Take a look at this partial implementation of a system with support for byte-sized memory accesses. The attacker and the victim program do not share memory, but they do use the same direct-mapped cache which has a size of 32 bytes and a block size of 1 byte. The victim program leaks the secret <code>FLAG</code> via a cache side channel. Your task is to determine the value of <code>FLAG</code> by performing memory accesses and running the victim program. Use your browser console to make <code>sys.attackerAccess()</code> and <code>sys.victimProgram()</code> function calls and capture the flag!
 
-For background information on caches, see <a href="https://docs.google.com/document/d/1KQ_LEzqQlrrOkQiXf-RAeiFgP9ADFlmkepMFMwEf8UI/edit?usp=sharing">here</a>.
+For information on caches, see <a href="https://docs.google.com/document/d/1KQ_LEzqQlrrOkQiXf-RAeiFgP9ADFlmkepMFMwEf8UI/edit?usp=sharing">here</a>.
 
 
 <pre>
@@ -21,12 +21,14 @@ class System {
       console.log("SEGMENTATION FAULT");
       return;
     }
-    return this.#access(address);
+    return this.access(address);
   }
 
   victimProgram() {
     for (let i = 0; i < FLAG.length; i++) {
-      this.#victimAccess(FLAG[i].charCodeAt() - 65);
+      let char = FLAG.charAt(i);
+      let address = char.charCodeAt() - 65;
+      let value = this.victimAccess(address);
     }
     console.log("VICTIM PROGRAM COMPLETE");
   }
@@ -36,6 +38,8 @@ sys = new System();
 </code>
 </pre>
 
+
+Hint 0: Which cache blocks are used when different memory addresses are accessed? Read through the <a href="https://docs.google.com/document/d/1KQ_LEzqQlrrOkQiXf-RAeiFgP9ADFlmkepMFMwEf8UI/edit?usp=sharing">information on caches</a> if you're not sure.
 
 Hint 1: Begin by "priming" the cache, filling the cache with known memory blocks using <code>sys.attackerAccess()</code> calls. Notice that a cache miss takes 3 seconds to retrieve the block from main memory, but each subsequent access of the same block is immediate since it is a cache hit.
 

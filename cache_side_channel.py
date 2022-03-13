@@ -54,7 +54,8 @@ def attacker_access(address):
 
 def victim_program():
     for char in FLAG:
-        _victim_access(ord(char) - 65)
+        address = ord(char) - 65
+        value = _victim_access(address)
     print("VICTIM PROGRAM COMPLETE")
 
 
