@@ -7,7 +7,7 @@
 <script>
 function run(input) {
   if (event.key === "Enter") {
-    alert((input.toUpperCase() == FLAG.toUpperCase()) ? "Correct" : "Incorrect");
+    alert((input.toUpperCase() === FLAG.toUpperCase()) ? "Correct" : "Incorrect");
   }
 }
 </script>
@@ -16,7 +16,7 @@ function run(input) {
 <body>
 <input type="text" placeholder="Check flag" onkeydown="run(this.value)"/>
 <p>Take a look at this partial implementation of a system with support for byte-sized memory accesses. The attacker and the victim program do not share memory, but they do use the same direct-mapped cache which has a size of 32 bytes and a block size of 1 byte. The victim program leaks the secret <code>FLAG</code> via a cache side channel. Your task is to determine the value of <code>FLAG</code> by performing memory accesses and running the victim program. Use your browser console to make <code>await sys.attackerAccess()</code> and <code>await sys.victimProgram()</code> function calls and capture the flag!</p>
-<p>For information on caches, see <a href="https://docs.google.com/document/d/1KQ_LEzqQlrrOkQiXf-RAeiFgP9ADFlmkepMFMwEf8UI/edit?usp=sharing" target="_blank">here</a>.</p>
+<p>For information on caches, see <a href="https://github.com/evanmmitchell/prime-and-probe-sim/blob/main/intro-to-caches.md" target="_blank">here</a>.</p>
 <p><strong>Note that it is necessary to include the <code>await</code> keyword in front of the function calls for proper behavior.</strong></p>
 <pre>
 <code>
@@ -53,7 +53,7 @@ sys = new System();
 
 </code>
 </pre>
-<p>Hint 0: Which cache blocks are used when different memory addresses are accessed? Read through the <a href="https://docs.google.com/document/d/1KQ_LEzqQlrrOkQiXf-RAeiFgP9ADFlmkepMFMwEf8UI/edit?usp=sharing" target="_blank">information on caches</a> if you're not sure.</p>
+<p>Hint 0: Which cache blocks are used when different memory addresses are accessed? Read through the <a href="https://github.com/evanmmitchell/prime-and-probe-sim/blob/main/intro-to-caches.md" target="_blank">information on caches</a> if you're not sure.</p>
 <p>Hint 1: Begin by "priming" the cache, filling the cache with known memory blocks using <code>await sys.attackerAccess()</code> calls. Notice that a cache miss takes 3 seconds to retrieve the block from main memory, but each subsequent access of the same block is immediate since it is a cache hit.</p>
 <p>Hint 2: Call <code>await sys.victimProgram()</code> to run the victim program, which replaces certain cache blocks based on the value of <code>FLAG</code>.</p>
 <p>Hint 3: "Probe" the cache by making <code>await sys.attackerAccess()</code> calls and observing how long they take. If an access takes 3 seconds, the block must have been replaced by the victim program and needed to be retrieved again from main memory.</p>
